@@ -80,7 +80,6 @@ const theme = createMuiTheme({
   },
 });
 
-//custom style for modal
 const customStyles = {
   content: {
     top: "50%",
@@ -92,7 +91,7 @@ const customStyles = {
   },
 };
 
-// Tab container inside the modal
+// Container inside the modal
 const TabContainer = function (props) {
   return (
     <Typography component="div" style={{ padding: 0, textAlign: "center" }}>
@@ -146,26 +145,16 @@ class Header extends Component {
     return (
       <div>
         <AppBar position="static" className={classes.appBar}>
-          {/* Toolbar that contains app logo, searchbox and login button */}
           <Toolbar className={classes.headerTools}>
-            {/* app logo inside iconButton*/}
-            <IconButton
-              disableRipple={true}
-              className={classes.logo}
-              edge="start"
-              color="inherit"
-              aria-label="app logo"
-            >
+            <IconButton disableRipple={true} className={classes.logo} edge="start" color="inherit" aria-label="app logo" >
               <FastfoodIcon />
             </IconButton>
             <div className={classes.grow} />
-            {/* searchbox will be displayed only if needed */}
             {this.props.showSearchBox ? (
               <div className={classes.searchBox}>
                 <ThemeProvider theme={theme}>
                   <InputLabel htmlFor="search-box-input" />
-                  <Input
-                    id="search-box-input"
+                  <Input id="search-box-input"
                     startAdornment={
                       <InputAdornment position="start">
                         <SearchIcon />
@@ -175,14 +164,12 @@ class Header extends Component {
                     classes={{
                       root: classes.inputRoot,
                       input: classes.inputInput,
-                    }}
-                    onChange={this.props.searchHandler}
-                  />
+                    }} onChange={this.props.searchHandler}/>
                 </ThemeProvider>
               </div>
             ) : null}
             <div className={classes.grow} />
-            {/* If customer is not logged in then it displays login button otherwise displays the customer's firstname */}
+            {/* Display name only if logged in */}
             {!this.state.loggedIn ? (
               <div className={classes.headerLoginBtn}>
                 <Button variant="contained" color="default" startIcon={<AccountCircle />} onClick={this.openModalHandler}>
@@ -191,43 +178,17 @@ class Header extends Component {
               </div>
             ) : (
               <div className={classes.customerProifleBtn}>
-                <Button
-                  id="customer-profile"
-                  startIcon={<AccountCircle />}
-                  onClick={this.onProfileIconClick}
-                >
+                <Button id="customer-profile" startIcon={<AccountCircle />} onClick={this.onProfileIconClick} >
                   {sessionStorage.getItem("first-name")}
                 </Button>
-                <Menu
-                  id="profile-menu"
-                  open={this.state.menuState}
-                  onClose={this.onMenuClose}
-                  anchorEl={this.state.anchorEl}
-                  getContentAnchorEl={null}
-                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                  keepMounted
-                >
-                  <MenuItem
-                    style={{ minHeight: 48 }}
-                    onClick={this.onMyProfile}
-                  >
+                <Menu id="profile-menu" open={this.state.menuState} onClose={this.onMenuClose} anchorEl={this.state.anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "left" }} keepMounted  >
+                  <MenuItem style={{ minHeight: 48 }} onClick={this.onMyProfile}>
                     <Typography>
-                      <Link
-                        to={"/profile"}
-                        style={{ textDecoration: "none", color: "black" }}
-                      >
-                        My Profile
-                      </Link>
+                      <Link to={"/profile"} style={{ textDecoration: "none", color: "black" }} >My Profile </Link>
                     </Typography>
                   </MenuItem>
                   <MenuItem style={{ minHeight: 48 }} onClick={this.onLogout}>
-                    <Link
-                      to={"/"}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
-                    >
+                    <Link to={"/"} style={{textDecoration: "none", color: "black"}}>
                       <Typography>Logout</Typography>
                     </Link>
                   </MenuItem>
@@ -236,16 +197,16 @@ class Header extends Component {
             )}
           </Toolbar>
         </AppBar>
-        {/* displays login modal if customer clicks on the login button, modal contains two tabs one for login and one for signup */}
+        {/* Login modal when login button is clicked*/}
         <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModalHandler} style={customStyles}>
           <Tabs value={this.state.value} className="tabs" onChange={this.tabChangeHandler}>
             <Tab label="Login" />
             <Tab label="Signup" />
           </Tabs>
-          {/* If value is 0 then displays the first tab of the modal */}
+          {/* If value== 0 then displays Login tab */}
           {this.state.value === 0 && (
             <TabContainer>
-              {/* login form with contact no and password input fields */}
+              {/* Login Form */}
               <FormControl required className="login-and-signup-forms">
                 <InputLabel htmlFor="contactno">Contact No</InputLabel>
                 <Input id="contactno" type="text" value={this.state.loginContactNo} contactno={this.state.loginContactNo} onChange={this.inputLoginContactNoChangeHandler}/>
@@ -271,9 +232,10 @@ class Header extends Component {
               <Button variant="contained" color="primary"onClick={this.loginClickHandler}>LOGIN</Button>
             </TabContainer>
           )}
+          {/* If value== 1 then displays Sign up tab */}
           {this.state.value === 1 && (
             <TabContainer>
-              {/* signup form contains firstname, lastname, email, password and contact no input fields */}
+                {/* FirstName */}
               <FormControl required className="login-and-signup-forms">
                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                 <Input id="firstname" type="text" value={this.state.signupFirstname} signupfirstname={this.state.signupFirstname} onChange={this.inputSignupFirstNameChangeHandler}/>
@@ -283,12 +245,14 @@ class Header extends Component {
               </FormControl>
               <br />
               <br />
+              {/* LastName */}
               <FormControl className="login-and-signup-forms">
                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                 <Input id="lastname" type="text" value={this.state.singupLastname} signuplastname={this.state.singupLastname} onChange={this.inputSignupLastNameChangeHandler}/>
               </FormControl>
               <br />
               <br />
+              {/* Email */}
               <FormControl required className="login-and-signup-forms">
                 <InputLabel htmlFor="email">Email</InputLabel>
                 <Input id="email" type="text" value={this.state.signupEmail} signupemail={this.state.signupEmail} onChange={this.inputSignupEmailChangeHandler}/>
@@ -298,6 +262,7 @@ class Header extends Component {
               </FormControl>
               <br />
               <br />
+              {/* Password */}
               <FormControl required className="login-and-signup-forms">
                 <InputLabel htmlFor="signupPassword">Password</InputLabel>
                 <Input id="signupPassword" type="password" value={this.state.signupPassword} signuppassword={this.state.signupPassword} onChange={this.inputSignupPasswordChangeHandler} />
@@ -307,6 +272,7 @@ class Header extends Component {
               </FormControl>
               <br />
               <br />
+              {/* Contact Number */}
               <FormControl required className="login-and-signup-forms">
                 <InputLabel htmlFor="signupContactNo">Contact No.</InputLabel>
                 <Input id="signupContactNo" type="text" value={this.state.signupContactNo} signupcontactno={this.state.signupContactNo} onChange={this.inputSignupContactNoChangeHandler}/>
@@ -320,11 +286,12 @@ class Header extends Component {
                 <span id="signup-error-msg" className="red">{this.state.signupErrorMessage}</span>
               </div>
               <br />
+              {/* Signup button */}
               <Button variant="contained" color="primary" onClick={this.signupClickHandler}> SIGNUP</Button>
             </TabContainer>
           )}
         </Modal>
-        {/* login snackbar to display the message if customer login is successful  */}
+        {/* Snackbar to display the message if customer login is successful  */}
         <Snackbar anchorOrigin={{ vertical: "bottom",horizontal: "left"}} open={this.state.openLoginSnackBar} autoHideDuration={10000} onClose={this.loginSnackBarCloseHandler} 
           message="Logged in successfully!"
           action={
@@ -334,7 +301,7 @@ class Header extends Component {
               </IconButton>
             </React.Fragment>
           }/>
-        {/* signup snackbar to display the message if customer registered successfully  */}
+        {/* Snackbar to display the message if customer signedup successfully  */}
         <Snackbar anchorOrigin={{ vertical: "bottom",horizontal: "left"}} open={this.state.openSignupSnackBar} autoHideDuration={10000} onClose={this.signupSnackBarCloseHandler}
           message="Registered successfully! Please login now!"
           action={
@@ -348,6 +315,7 @@ class Header extends Component {
     );
   }
 
+// When modal is opened all the values and required field validations errors are cleared
   openModalHandler = () => {
     this.setState({
       modalIsOpen: true,
@@ -381,6 +349,7 @@ class Header extends Component {
     this.setState({ value });
   };
 
+//   Function called when login button is clicked. Field validation is done.
   loginClickHandler = () => {
     let contactNoRequired = false;
     if (this.state.loginContactNo === "") {
@@ -431,7 +400,7 @@ class Header extends Component {
     this.sendLoginDetails();
   };
 
-
+// Called when value of the contact no field changes in login form
   inputLoginContactNoChangeHandler = (e) => {
     this.setState({ loginContactNo: e.target.value });
   };
@@ -578,7 +547,7 @@ class Header extends Component {
 
     this.sendSignupDetails();
   };
-
+// Change handlers for each field in signup form
   inputSignupFirstNameChangeHandler = (e) => {
     this.setState({ signupFirstname: e.target.value });
   };
@@ -674,12 +643,14 @@ class Header extends Component {
     this.setState({ menuState: !this.state.menuState, anchorEl: null });
   };
 
+//   Redirect to Profile page
   onMyProfile = () => {
     this.setState({
       loggedIn: true,
     });
   };
 
+//  When logout is clicked the access-token, uuid, first-name  are removed from sessionStorage
   onLogout = () => {
     sessionStorage.removeItem("access-token");
     sessionStorage.removeItem("uuid");
