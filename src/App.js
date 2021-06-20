@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-// import { Route, Switch } from "react-router-dom";
+import React, {Component} from 'react'
+import {Route, Switch} from "react-router-dom";
+import Home from './screens/home/Home';
 
 class App extends Component {
 
@@ -11,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                Food Ordering App
+                <Home/>
             </div>
         )
 
