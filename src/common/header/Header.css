@@ -33,17 +33,6 @@
     color: white;
   }
   
-  #signup-error-msg-div {
-    display: flex;
-    font-size: smaller;
-  }
-  
-  #signup-error-msg {
-    width: 80%;
-    margin: auto;
-    text-align: left;
-  }
-  
   /* For screen size upto 600px */
   
   @media screen and (max-width: 600px) {
