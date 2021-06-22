@@ -215,6 +215,34 @@ class Details extends Component {
         return pascalCasedString;
     }
     
+    // SnackBar=(props)=> 
+    // {
+    // return (
+    //     <Snackbar
+    //         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+    //         open={props.open} autoHideDuration={1000} onClose={props.closeHandler} message={props.message}
+    //         action={
+    //             <React.Fragment>
+    //                 <IconButton size="small" aria-label="close" color="inherit" onClick={props.closeHandler}>
+    //                     <CloseIcon fontSize="small" />
+    //                 </IconButton>
+    //             </React.Fragment>
+    //         } />
+    //     );
+    // }
+
+    // SnackBar(props) {
+    //     <Snackbar
+    //         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+    //         open={props.open} autoHideDuration={1000} onClose={props.closeHandler} message={props.message}
+    //         action={
+    //             <React.Fragment>
+    //                 <IconButton size="small" aria-label="close" color="inherit" onClick={props.closeHandler}>
+    //                     <CloseIcon fontSize="small" />
+    //                 </IconButton>
+    //             </React.Fragment>
+    //         } />
+    // }
 
     render() {
         return (
@@ -422,7 +450,22 @@ class Details extends Component {
                             </Card>
                         </div>
                     </div>
-                    
+                    <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }} 
+                        autoHideDuration={1000} 
+                        open={this.state.open} 
+                        onClose={this.closeHandler} 
+                        message="Item added to cart!" 
+                        action={
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={this.closeHandler}>
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                    }/>
+
+                    {/* <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }} open={this.state.cartEmpty} closeHandler={this.closeHandler} message="Please add an item to your cart!" />
+                    <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }} open={this.state.nonloggedIn} closeHandler={this.closeHandler} message="Please login first!" />
+                    <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }} open={this.state.itemRemovedFromCart} closeHandler={this.closeHandler} message="Item removed from cart!" />
+                    <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }} open={this.state.itemQuantityIncreased} closeHandler={this.closeHandler} message="Item quantity increased by 1!" />
+                    <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }} open={this.state.itemQuantityDecreased} closeHandler={this.closeHandler} message="Item quantity decreased by 1!"/> */}
                 </div>
             </div>
         );
