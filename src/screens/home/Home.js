@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from '../../common/header/Header'
 import "./Home.css";
-
+//Import statemets
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import Card from "@material-ui/core/Card";
@@ -48,6 +48,7 @@ class Home extends Component {
     window.removeEventListener("resize", this.noOfColumns);
   }
 
+//   Get Restaurants from backened
   getRestaurants = () => {
     let that = this;
     let restaurantsData = null;
@@ -67,6 +68,7 @@ class Home extends Component {
     xhrRestaurants.send(restaurantsData);
   };
 
+//   Update column based on windows size
   noOfColumns = () => {
     if (window.innerWidth >= 320 && window.innerWidth <= 600) {
       this.setState({
@@ -140,7 +142,9 @@ class Home extends Component {
         <Header showSearchBox={true} searchHandler={this.searchHandler} baseUrl={this.props.baseUrl}/>
         {this.state.restaurants.length === 0 && this.state.loading === false ? (
           <Typography variant="h6">
-            No restaurant with the given name.
+              <p style = {{padding:40, fontWeight:"bolder"}}>
+                 No restaurant with the given name.
+              </p>
           </Typography>) : (
           <GridList cols={this.state.cards} cellHeight="auto">
             {this.state.restaurants.map((restaurant) => (
@@ -160,7 +164,7 @@ class Home extends Component {
                         </Typography>
                       </div>
                       <div className="rating-and-avg-div">
-                        {/* restaurant rating */}
+                        {/* Restaurant rating */}
                         <div className="restaurant-rating-div">
                           <Typography variant="body1">
                             <i className="fa fa-star"></i>{" "}
@@ -168,7 +172,7 @@ class Home extends Component {
                             {restaurant.number_customers_rated})
                           </Typography>
                         </div>
-                        {/* restaurant average price */}
+                        {/* Restaurant average price */}
                         <div className="restaurant-avg-price-div">
                           <Typography variant="body1">
                             <i className="fa fa-inr" aria-hidden="true"></i>

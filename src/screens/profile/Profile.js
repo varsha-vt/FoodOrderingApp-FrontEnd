@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './Profile.css'
 import Header from '../../common/header/Header'
 
 class Profile extends Component {
@@ -7,7 +6,7 @@ class Profile extends Component {
         return(
             <div>
                 <Header showSearchBox={true}/>
-                <div>Profile Page</div>
+                <h1 style={{textAlign:"center", marginTop: "10%"}}>Profile Page</h1>
             </div>
            
         );
