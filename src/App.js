@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './screens/home/Home';
 import Profile from './screens/profile/Profile'
+import Details from './screens/details/Details'
 
 class App extends Component {
 
