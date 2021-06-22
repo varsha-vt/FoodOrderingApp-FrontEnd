@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {Route, Switch} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './screens/home/Home';
+import Profile from './screens/profile/Profile'
 
 class App extends Component {
 
@@ -11,9 +12,13 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <Home/>
-            </div>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path='/' render={(props) => <Home {...props} baseUrl={this.baseUrl}/>}/>
+                    <Route exact path='/profile' render={(props) => <Profile {...props} />}/> 
+                </Switch>
+            </BrowserRouter>
+            
         )
 
     }
