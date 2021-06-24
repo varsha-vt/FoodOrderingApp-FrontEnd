@@ -56,7 +56,7 @@ class Home extends Component {
     xhrRestaurants.onload = this.setState({ loading: true });
     xhrRestaurants.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
-        console.log(this.responseText);
+        // console.log(this.responseText);
         that.setState({
           restaurants: JSON.parse(this.responseText).restaurants,
           loading: false,
