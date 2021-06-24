@@ -221,35 +221,6 @@ class Details extends Component {
         return pascalCasedString;
     }
     
-    // SnackBar=(props)=> 
-    // {
-    // return (
-    //     <Snackbar
-    //         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //         open={props.open} autoHideDuration={1000} onClose={props.closeHandler} message={props.message}
-    //         action={
-    //             <React.Fragment>
-    //                 <IconButton size="small" aria-label="close" color="inherit" onClick={props.closeHandler}>
-    //                     <CloseIcon fontSize="small" />
-    //                 </IconButton>
-    //             </React.Fragment>
-    //         } />
-    //     );
-    // }
-
-    // SnackBar(props) {
-    //     <Snackbar
-    //         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //         open={props.open} autoHideDuration={1000} onClose={props.closeHandler} message={props.message}
-    //         action={
-    //             <React.Fragment>
-    //                 <IconButton size="small" aria-label="close" color="inherit" onClick={props.closeHandler}>
-    //                     <CloseIcon fontSize="small" />
-    //                 </IconButton>
-    //             </React.Fragment>
-    //         } />
-    // }
-
     render() {
         return (
             <div>
