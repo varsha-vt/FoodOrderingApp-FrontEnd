@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import './Checkout.css'
+//Import Statements
 import Header from '../../common/header/Header'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -70,6 +71,7 @@ class Checkout extends Component {
         }
     }
 
+    // Used for stepper to move ahead based on user actions
     incrementActiveStep = () => {
         if (this.state.activeStep === 0 && this.state.selectedAddressId === undefined) {
 
@@ -85,13 +87,13 @@ class Checkout extends Component {
             this.setState({ activeStep: activeState, displayChange: changeAddressPayment })
         }
     }
-
+// Used for stepper to move backwards based on user actions.
     decrementActiveStep = () => {
         let activeState = this.state.activeStep - 1;
         this.setState({ activeStep: activeState })
     }
 
-
+// Used for stepper reset to first step when user wants to change the order.
     resetActiveStep = () => {
         this.setState({ activeStep: 0, displayChange: 'display-none' })
     }
@@ -103,8 +105,7 @@ class Checkout extends Component {
         }
     }
 
-
-
+    // Used when a user clicks on one address tile to select the address.
     selectAddress = (e) => {
         let elementId = e.target.id;
         if (elementId.startsWith('select-address-icon-')) {
@@ -158,7 +159,7 @@ class Checkout extends Component {
         this.setState({ placeOrderMessageOpen: false });
     }
 
-
+// Get address via API
     fetchAddress = () => {
         let token = sessionStorage.getItem('access-token');
 
@@ -182,7 +183,7 @@ class Checkout extends Component {
         xhr.send();
     }
 
-
+    // Get State via api
     fetchStates = () => {
 
         let xhr = new XMLHttpRequest();
@@ -204,6 +205,7 @@ class Checkout extends Component {
         xhr.send();
     }
 
+// Get Payments via API
     fetchPayments = () => {
 
         let xhr = new XMLHttpRequest();
@@ -225,6 +227,7 @@ class Checkout extends Component {
         xhr.send();
     }
 
+    // Save address via API
     saveAddress = () => {
         let tempCityRequired = false;
         let tempPincodeRequired = false;
@@ -300,6 +303,7 @@ class Checkout extends Component {
         xhr.send(JSON.stringify(address));
     }
 
+    //Order is placed via API
     placeOrder = () => {
         if (this.state.selectedAddressId === '' || this.state.selectedAddressId === undefined || this.state.paymentId === '' || this.state.paymentId === undefined || this.state.displayChange === 'display-none') {
             this.setState({
