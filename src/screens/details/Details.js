@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import "./Details.css"
 import Header from '../../common/header/Header'
+//Import Statements
 import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
 import AddIcon from "@material-ui/icons/Add";
@@ -14,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+
 class Details extends Component {
 
     constructor() {
@@ -71,6 +73,7 @@ class Details extends Component {
         xhr.send(data);
     }
 
+    // Get index of the item
     getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i][prop] === value) {
@@ -80,6 +83,7 @@ class Details extends Component {
         return -1; //case where the value doesn't exist
     };
 
+    // Function when item is added to the cart
     addToCartHandler = (e, id, type, name, price) => {
         var totalAmount = this.state.totalAmount;
         var totalItems = this.state.totalItems;
@@ -124,6 +128,7 @@ class Details extends Component {
         this.setState({ totalAmount: totalAmount });
     };
 
+    // Function when item is removed from the cart
     removeFromCartHandler = (e, id, type, name, price) => {
         var index = this.getIndex(name, this.state.orderItems.items, "name");
 
@@ -206,6 +211,7 @@ class Details extends Component {
         }
     };
 
+    // Function to capitalize string
     Capitalize(str) {
         var arr = str.split(" ");
         var pascalCasedString = "";
@@ -215,35 +221,6 @@ class Details extends Component {
         return pascalCasedString;
     }
     
-    // SnackBar=(props)=> 
-    // {
-    // return (
-    //     <Snackbar
-    //         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //         open={props.open} autoHideDuration={1000} onClose={props.closeHandler} message={props.message}
-    //         action={
-    //             <React.Fragment>
-    //                 <IconButton size="small" aria-label="close" color="inherit" onClick={props.closeHandler}>
-    //                     <CloseIcon fontSize="small" />
-    //                 </IconButton>
-    //             </React.Fragment>
-    //         } />
-    //     );
-    // }
-
-    // SnackBar(props) {
-    //     <Snackbar
-    //         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //         open={props.open} autoHideDuration={1000} onClose={props.closeHandler} message={props.message}
-    //         action={
-    //             <React.Fragment>
-    //                 <IconButton size="small" aria-label="close" color="inherit" onClick={props.closeHandler}>
-    //                     <CloseIcon fontSize="small" />
-    //                 </IconButton>
-    //             </React.Fragment>
-    //         } />
-    // }
-
     render() {
         return (
             <div>
